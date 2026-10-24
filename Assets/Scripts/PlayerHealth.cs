@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -24,9 +23,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Bullet>(out Bullet bullet))
         {
+            Debug.Log($"Hit by {bullet.gameObject}");
             health -= 20.0f;
             Destroy(bullet.gameObject);
-            Debug.Log("Hit by bullet");
             Debug.Log(health);
         }
     }

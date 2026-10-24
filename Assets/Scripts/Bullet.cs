@@ -1,16 +1,16 @@
+using System;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    private PolygonCollider2D collider;
-
     public float bulletSpeed = 8.0f;
-    public float bulletDirection = -1.0f;
+    [ReadOnly(true)] public float bulletDirection;
 
     private void Start()
     {
-        collider = GetComponent<PolygonCollider2D>();
+        
     }
 
     // Update is called once per frame

@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
             rigidbody.linearVelocityX = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             rigidbody.linearVelocity = Vector2.up * jumpScale;
         }
