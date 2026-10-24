@@ -27,58 +27,58 @@ public class Bomb : MonoBehaviour
         if (playerTarget != null)
         {
             targetPosition = playerTarget.transform.position;
-            StartCoroutine(Logic());
         } else
         {
             Destroy(gameObject);
+            return;
         }
 
         rotationValue = rotationStrength - rotationStrength * rotationEndPercentage;
         rotationDecay = rotationStrength / duration;
     }
 
-    private IEnumerator Logic()
+    private void Update()
     {
-        while (timer < duration)
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
+
+        float rotation = rotationValue - rotationDecay * timer;
+        if (rotation < 0.0f) { rotation = 0.0f; }
+
+        transform.Rotate(0.0f, 0.0f, rotation * Time.deltaTime);
+
+        if (transform.position.x > 25.0f || transform.position.x < -25.0f)
         {
-            transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
-
-            float rotation = rotationValue - rotationDecay * timer;
-            if (rotation < 0.0f) { rotation = 0.0f; }
-
-            transform.Rotate(0.0f, 0.0f, rotation * Time.deltaTime);
-
-            if (transform.position.x > 25.0f || transform.position.x < -25.0f)
-            {
-                Destroy(gameObject);
-                yield break;
-            }
-
-            float flashInterval = Mathf.Clamp(Mathf.InverseLerp(0.0f, rotationStrength, rotationStrength - rotationDecay * timer), 0.05f, 1.0f);
-
-            sinceSwitched += Time.deltaTime;
-
-            if (sinceSwitched >= flashInterval)
-            {
-                if (!isFlashed)
-                {
-                    renderer.color = Color.white;
-                    isFlashed = true;
-                } else
-                {
-                    renderer.color = baseColor;
-                    isFlashed = false;
-                }
-
-                sinceSwitched = 0.0f;
-            }
-
-            timer += Time.deltaTime;
-
-            yield return null;
+            Destroy(gameObject);
+            return;
         }
 
-        Debug.Log("Boom");
-        Destroy(gameObject);
+        if (timer >= duration)
+        {
+            Debug.Log("Boom");
+            Destroy(gameObject);
+            return;
+        }
+
+        float flashInterval = Mathf.Clamp(Mathf.InverseLerp(0.0f, rotationStrength, rotationStrength - rotationDecay * timer), 0.05f, 0.5f);
+
+        sinceSwitched += Time.deltaTime;
+
+        if (sinceSwitched >= flashInterval)
+        {
+            if (!isFlashed)
+            {
+                renderer.color = Color.white;
+                isFlashed = true;
+            }
+            else
+            {
+                renderer.color = baseColor;
+                isFlashed = false;
+            }
+
+            sinceSwitched = 0.0f;
+        }
+
+        timer += Time.deltaTime;
     }
 }

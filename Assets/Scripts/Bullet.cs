@@ -22,6 +22,7 @@ public class Bullet : MonoBehaviour
         if (transform.position.x > 25.0f || transform.position.x < -25.0f)
         {
             Destroy(gameObject);
+            return;
         }
     }
 }
