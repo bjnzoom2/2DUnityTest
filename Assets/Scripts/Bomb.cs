@@ -15,6 +15,8 @@ public class Bomb : MonoBehaviour
 
     private float rotationValue;
     private float rotationDecay;
+    public float implodeBefore = 0.5f;
+    private float implodeTime;
     private bool isFlashed = false;
     private float sinceSwitched = 0.0f;
 
@@ -35,6 +37,7 @@ public class Bomb : MonoBehaviour
 
         rotationValue = rotationStrength - rotationStrength * rotationEndPercentage;
         rotationDecay = rotationStrength / duration;
+        implodeTime = duration - implodeBefore;
     }
 
     private void Update()
@@ -45,6 +48,12 @@ public class Bomb : MonoBehaviour
         if (rotation < 0.0f) { rotation = 0.0f; }
 
         transform.Rotate(0.0f, 0.0f, rotation * Time.deltaTime);
+
+        if (duration - timer <= 0.5f)
+        {
+            float implosionValue = 1.0f - Mathf.InverseLerp(implodeTime, duration, timer);
+            transform.localScale = new Vector3(implosionValue, implosionValue, implosionValue);
+        }
 
         if (transform.position.x > 25.0f || transform.position.x < -25.0f)
         {
