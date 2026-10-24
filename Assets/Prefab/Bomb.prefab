@@ -159,6 +159,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f464cf52fd1674d4687b4451cdda02cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
-  speed: 5
+  speed: 4.5
   duration: 3
   rotationStrength: 800
+  rotationEndPercentage: 0.333333

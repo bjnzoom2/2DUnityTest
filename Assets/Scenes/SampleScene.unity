@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   speed: 6.5
-  jumpScale: 8
+  jumpScale: 9
 --- !u!61 &327213286
 BoxCollider2D:
   m_ObjectHideFlags: 0

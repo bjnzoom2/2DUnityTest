@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     public float speed = 10.0f;
-    public float jumpScale = 8.0f;
+    public float jumpScale = 9.0f;
 
     private void Start()
     {

@@ -19,7 +19,7 @@ public class BombSpawner : MonoBehaviour
         if (timer >= spawnInterval)
         {
             bool determiner = (Random.value >= 0.5) ? true : false;
-            GameObject bombInstance = Instantiate(bombPrefab, new Vector3((determiner) ? 17.0f : -17.0f, Random.Range(-7.5f, 7.5f), 0.0f), Quaternion.identity);
+            GameObject bombInstance = Instantiate(bombPrefab, new Vector3((determiner) ? 17.0f : -17.0f, Random.Range(-7.5f, 7.5f), 0.0f), Quaternion.Euler(0.0f, 0.0f, Random.Range(-180.0f, 180.0f)));
             timer = 0.0f;
         }
 
