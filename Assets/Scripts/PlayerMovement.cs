@@ -4,8 +4,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Rigidbody2D rigidbody;
-    public BoxCollider2D collider;
+    private Rigidbody2D rigidbody;
 
     public float speed = 10.0f;
     public float jumpScale = 8.0f;
@@ -14,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Debug.Log("Hello");
         rigidbody = GetComponent<Rigidbody2D>();
-        collider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
