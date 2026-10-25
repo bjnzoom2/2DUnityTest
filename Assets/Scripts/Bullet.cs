@@ -2,15 +2,28 @@ using System;
 using System.ComponentModel;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+interface IDamager
+{
+    public float Damage
+    {
+        get;
+    }
+}
+
+public class Bullet : MonoBehaviour, IDamager
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public float bulletSpeed = 8.0f;
     [ReadOnly(true)] public float bulletDirection;
 
+    public float Damage
+    {
+        get; private set;
+    }
+
     private void Start()
     {
-        
+        this.Damage = 20.0f;
     }
 
     // Update is called once per frame

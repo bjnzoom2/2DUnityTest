@@ -19,6 +19,7 @@ public class Bomb : MonoBehaviour
     private float implodeTime;
     private bool isFlashed = false;
     private float sinceSwitched = 0.0f;
+    public GameObject shrapnelPrefab;
 
     private void Start()
     {
@@ -56,7 +57,7 @@ public class Bomb : MonoBehaviour
             transform.localScale = new Vector3(implosionValue, implosionValue, implosionValue);
         }
 
-        if (transform.position.x > 25.0f || transform.position.x < -25.0f)
+        if (transform.position.x > 25.0f || transform.position.x < -25.0f || transform.position.y > 25.0f || transform.position.y < -25.0f)
         {
             Destroy(gameObject);
             return;
@@ -64,6 +65,13 @@ public class Bomb : MonoBehaviour
 
         if (timer >= duration)
         {
+            float zRotation = transform.eulerAngles.z;
+
+            for (int i = 0; i < 6; i++)
+            {
+                Instantiate(shrapnelPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, zRotation + (60.0f * i)));
+            }
+
             Debug.Log("Boom");
             Destroy(gameObject);
             return;

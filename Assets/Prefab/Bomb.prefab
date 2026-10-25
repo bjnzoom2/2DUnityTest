@@ -159,7 +159,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f464cf52fd1674d4687b4451cdda02cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Bomb
-  speed: 4.5
+  renderer: {fileID: 0}
+  speed: 4.75
   duration: 3
   rotationStrength: 800
   rotationEndPercentage: 0.333333
+  implodeBefore: 0.5
+  shrapnelPrefab: {fileID: 3903356621217889760, guid: ca0dff6726357a447ab6fa47be680201, type: 3}

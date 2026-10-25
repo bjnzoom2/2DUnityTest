@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
         {
             if (deathParticlePrefab != null)
             {
-                ParticleSystem deathParticleInstance = Instantiate<ParticleSystem>(deathParticlePrefab, transform.position, Quaternion.identity);
+                ParticleSystem deathParticleInstance = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
                 deathParticleInstance.Play();
             }
             Destroy(gameObject);
@@ -28,11 +28,13 @@ public class PlayerHealth : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Bullet>(out Bullet bullet))
+        if (collision.gameObject.TryGetComponent<IDamager>(out IDamager damager))
         {
-            Debug.Log($"Hit by {bullet.gameObject}");
-            health -= 20.0f;
-            Destroy(bullet.gameObject);
+            GameObject damagerGameObject = (damager as Component).gameObject;
+
+            Debug.Log($"Hit by {damagerGameObject}");
+            health -= damager.Damage;
+            Destroy(damagerGameObject);
             Debug.Log(health);
         }
     }
