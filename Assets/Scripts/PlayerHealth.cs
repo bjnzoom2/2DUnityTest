@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private BoxCollider2D collider;
+    public ParticleSystem deathParticlePrefab;
 
     public float health = 100.0f;
 
@@ -15,7 +16,13 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health <= 0.0f)
         {
+            if (deathParticlePrefab != null)
+            {
+                ParticleSystem deathParticleInstance = Instantiate<ParticleSystem>(deathParticlePrefab, transform.position, Quaternion.identity);
+                deathParticleInstance.Play();
+            }
             Destroy(gameObject);
+            return;
         }
     }
 
