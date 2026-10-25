@@ -51,7 +51,8 @@ public class Bomb : MonoBehaviour
 
         if (duration - timer <= 0.5f)
         {
-            float implosionValue = 1.0f - Mathf.InverseLerp(implodeTime, duration, timer);
+            float implosionProgress = Mathf.InverseLerp(implodeTime, duration, timer);
+            float implosionValue = 1.0f - (implosionProgress * implosionProgress * implosionProgress);
             transform.localScale = new Vector3(implosionValue, implosionValue, implosionValue);
         }
 
