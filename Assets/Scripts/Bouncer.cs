@@ -3,11 +3,12 @@ using UnityEngine;
 public class Bouncer : MonoBehaviour, IDamager
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
-    public float bouncerSpeed = 5.0f;
+    public float bouncerSpeed = 12.0f;
     private int bounceCount = 0;
     public int maxBounce = 3;
     private Vector3 movingVector;
     private Vector3 direction;
+    private bool enteredBorders = false;
     public float Damage
     {
         get; private set;
@@ -24,7 +25,7 @@ public class Bouncer : MonoBehaviour, IDamager
     {
         movingVector = direction * bouncerSpeed * Time.deltaTime;
 
-        if (bounceCount <= maxBounce)
+        if (bounceCount <= maxBounce && enteredBorders)
         {
             if ((transform.position + movingVector).x > 15.0f || (transform.position + movingVector).x < -15.0f)
             {
@@ -45,11 +46,14 @@ public class Bouncer : MonoBehaviour, IDamager
             }
         }
 
-        movingVector = direction * bouncerSpeed * Time.deltaTime;
+        if (transform.position.x <= 15.0f && transform.position.x >= -15.0f && transform.position.y <= 7.075f && transform.position.y >= -7.075f && !enteredBorders)
+        {
+            enteredBorders = true;
+        }
 
         transform.position += movingVector;
 
-        if (transform.position.x > 25.0f || transform.position.x < -25.0f || transform.position.y > 25.0f || transform.position.y < -25.0f)
+        if (transform.position.x > 40.0f || transform.position.x < -40.0f || transform.position.y > 40.0f || transform.position.y < -40.0f)
         {
             Destroy(gameObject);
             return;

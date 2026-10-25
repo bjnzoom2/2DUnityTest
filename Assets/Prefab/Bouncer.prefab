@@ -142,3 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8b2a86728c4014bb84c3e5b06d180a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  bouncerSpeed: 12
+  maxBounce: 3

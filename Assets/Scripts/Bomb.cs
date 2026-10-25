@@ -7,7 +7,7 @@ public class Bomb : MonoBehaviour
     private Color baseColor;
     private GameObject playerTarget;
     private Vector3 targetPosition;
-    public float speed = 4.75f;
+    public float speed = 4.5f;
     private float timer = 0.0f;
     public float duration = 3.0f;
     public float rotationStrength = 800.0f;
