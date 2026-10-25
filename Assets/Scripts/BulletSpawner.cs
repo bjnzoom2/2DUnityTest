@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
@@ -14,6 +15,11 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (!LogicHandler.BulletsActive) {
+            timer = 0.0f;
+            return;
+        }
+
         if (timer > spawnInterval)
         {
             float determiner = Random.value;

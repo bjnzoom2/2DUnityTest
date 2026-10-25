@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class BombSpawner : MonoBehaviour
@@ -8,14 +9,20 @@ public class BombSpawner : MonoBehaviour
     public float spawnInterval = 2.0f;
     public float timer = 0.0f;
 
-    void Start()
+    private void Start()
     {
         
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        if (!LogicHandler.BombsActive)
+        {
+            timer = 0.0f;
+            return;
+        }
+
         if (timer >= spawnInterval)
         {
             bool determiner = (Random.value >= 0.5) ? true : false;

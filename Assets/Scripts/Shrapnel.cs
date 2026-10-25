@@ -7,13 +7,13 @@ public class Shrapnel : MonoBehaviour, IDamager
     {
         get; private set;
     }
-    void Start()
+    private void Start()
     {
         this.Damage = 15.0f;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         transform.position += transform.right * shrapnelSpeed * Time.deltaTime;
 
