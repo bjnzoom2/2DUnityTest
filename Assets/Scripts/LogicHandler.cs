@@ -54,7 +54,7 @@ public class LogicHandler : MonoBehaviour
         BouncersActive = true;
         RadiationActive = true;
         BombSpawner.spawnInterval = 1.75f;
-        BouncerSpawner.spawnInterval = 5.0f;
+        BouncerSpawner.spawnInterval = 5.5f;
         RadiationWaveSpawner.spawnInterval = 0.65f;
         yield return new WaitForSeconds(30.0f);
 

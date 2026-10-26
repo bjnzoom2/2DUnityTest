@@ -5,7 +5,7 @@ public class BouncerSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject bouncerPrefab;
     private float timer = 0.0f;
-    [NonSerialized] static public float spawnInterval = 5.0f;
+    [NonSerialized] static public float spawnInterval = 5.5f;
 
     void Start()
     {
