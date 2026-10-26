@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     private BoxCollider2D collider;
-    [SerializeField] static private ParticleSystem deathParticlePrefab;
+    [SerializeField] private ParticleSystem deathParticlePrefab;
 
     public float Health
     {

@@ -1,10 +1,11 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
     public Slider healthBar;
-    public Text healthText;
+    public TextMeshProUGUI healthText;
 
     private void Start()
     {
