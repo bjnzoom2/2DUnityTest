@@ -5,10 +5,10 @@ using UnityEngine;
 public class BombSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject bombPrefab;
+    [SerializeField] private GameObject bombPrefab;
 
     [NonSerialized] static public float spawnInterval = 2.5f;
-    public float timer = 0.0f;
+    private float timer = 0.0f;
 
     private void Start()
     {

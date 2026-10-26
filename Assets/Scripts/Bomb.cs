@@ -19,7 +19,7 @@ public class Bomb : MonoBehaviour
     private float implodeTime;
     private bool isFlashed = false;
     private float sinceSwitched = 0.0f;
-    public GameObject shrapnelPrefab;
+    [SerializeField] private GameObject shrapnelPrefab;
 
     private void Start()
     {

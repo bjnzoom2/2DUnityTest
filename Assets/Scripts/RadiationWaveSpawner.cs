@@ -4,7 +4,7 @@ using UnityEngine;
 public class RadiationWaveSpawner : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject radiationWavePrefab;
+    [SerializeField] private GameObject radiationWavePrefab;
 
     private float timer = 0.0f;
     [NonSerialized] static public float spawnInterval = 0.6f;

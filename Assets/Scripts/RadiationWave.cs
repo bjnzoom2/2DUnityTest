@@ -3,7 +3,7 @@ using UnityEngine;
 public class RadiationWave : MonoBehaviour, IDamager
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public TrailRenderer trailPrefab;
+    [SerializeField] private TrailRenderer trailPrefab;
     private TrailRenderer trailInstance;
     public float particleSpeed = 15.0f;
     public float waveMagnitude = 10.0f;
@@ -26,6 +26,7 @@ public class RadiationWave : MonoBehaviour, IDamager
         trailInstance.transform.position = transform.position;
         if (transform.position.y > 25.0f || transform.position.y < -25.0f)
         {
+            Destroy(trailInstance);
             Destroy(gameObject);
             return;
         }

@@ -1,30 +1,38 @@
+using System;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
     private BoxCollider2D collider;
-    public ParticleSystem deathParticlePrefab;
+    [SerializeField] static private ParticleSystem deathParticlePrefab;
 
-    public float health = 100.0f;
+    public float Health
+    {
+        get; private set;
+    }
 
     private void Start()
     {
         collider = GetComponent<BoxCollider2D>();
+        Health = 100.0f;
     }
 
     private void Update()
     {
-        if (health <= 0.0f)
+        if (Health <= 0.0f)
         {
             if (deathParticlePrefab != null)
             {
                 ParticleSystem deathParticleInstance = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
                 deathParticleInstance.Play();
             }
+            Debug.Log("Dead");
             Destroy(gameObject);
             return;
         }
     }
+
+    static public event Action<float> OnTakeDamage;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -32,10 +40,9 @@ public class PlayerHealth : MonoBehaviour
         {
             GameObject damagerGameObject = (damager as Component).gameObject;
 
-            Debug.Log($"Hit by {damagerGameObject}");
-            health -= damager.Damage;
+            Health -= damager.Damage;
             Destroy(damagerGameObject);
-            Debug.Log(health);
+            OnTakeDamage?.Invoke(Health);
         }
     }
 }

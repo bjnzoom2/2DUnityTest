@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BouncerSpawner : MonoBehaviour
 {
-    public GameObject bouncerPrefab;
+    [SerializeField] private GameObject bouncerPrefab;
     private float timer = 0.0f;
     [NonSerialized] static public float spawnInterval = 5.0f;
 
