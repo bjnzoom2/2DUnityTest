@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bouncer : MonoBehaviour, IDamager
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
-    public float bouncerSpeed = 12.0f;
+    public float bouncerSpeed = 11.0f;
     private int bounceCount = 0;
     public int maxBounce = 3;
     private Vector3 movingVector;

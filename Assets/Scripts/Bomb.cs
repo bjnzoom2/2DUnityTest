@@ -72,7 +72,6 @@ public class Bomb : MonoBehaviour
                 Instantiate(shrapnelPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, zRotation + (60.0f * i)));
             }
 
-            Debug.Log("Boom");
             Destroy(gameObject);
             return;
         }
