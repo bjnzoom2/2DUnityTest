@@ -26,7 +26,7 @@ public class RadiationWave : MonoBehaviour, IDamager
         trailInstance.transform.position = transform.position;
         if (transform.position.y > 25.0f || transform.position.y < -25.0f)
         {
-            Destroy(trailInstance);
+            Destroy(trailInstance.gameObject);
             Destroy(gameObject);
             return;
         }
