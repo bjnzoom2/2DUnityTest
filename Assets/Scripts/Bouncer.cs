@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Bouncer : MonoBehaviour, IDamager
@@ -17,14 +18,14 @@ public class Bouncer : MonoBehaviour, IDamager
     private float xBounds = 13.25f;
     private float yBounds = 7.075f;
 
-    void Start()
+    private void Start()
     {
         this.Damage = 50.0f;
         direction = transform.right;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         movingVector = direction * bouncerSpeed * Time.deltaTime;
 
@@ -36,6 +37,7 @@ public class Bouncer : MonoBehaviour, IDamager
                 transform.position = (movingVector.x > 0.0f) ? new Vector3(xBounds - overshoot, transform.position.y, 0.0f) : new Vector3(-xBounds - overshoot, transform.position.y, 0.0f);
                 direction = new Vector3(-direction.x, direction.y, 0.0f);
                 bounceCount++;
+                OnBounce?.Invoke();
                 return;
             }
 
@@ -45,6 +47,7 @@ public class Bouncer : MonoBehaviour, IDamager
                 transform.position = (movingVector.y > 0.0f) ? new Vector3(transform.position.x, yBounds - overshoot, 0.0f) : new Vector3(transform.position.x, -yBounds - overshoot, 0.0f);
                 direction = new Vector3(direction.x, -direction.y, 0.0f);
                 bounceCount++;
+                OnBounce?.Invoke();
                 return;
             }
         }
@@ -62,4 +65,6 @@ public class Bouncer : MonoBehaviour, IDamager
             return;
         }
     }
+
+    static public event Action OnBounce;
 }

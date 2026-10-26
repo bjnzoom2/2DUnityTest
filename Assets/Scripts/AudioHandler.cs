@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioHandler : MonoBehaviour
@@ -5,6 +6,7 @@ public class AudioHandler : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip bombFire;
     [SerializeField] private AudioClip bombExplode;
+    [SerializeField] private AudioClip bouncerBounce;
 
     private void Start()
     {
@@ -15,6 +17,7 @@ public class AudioHandler : MonoBehaviour
     {
         Bomb.OnFire += BombFire;
         Bomb.OnExplode += BombExplode;
+        Bouncer.OnBounce += BouncerBounce;
     }
 
     private void BombFire()
@@ -25,5 +28,10 @@ public class AudioHandler : MonoBehaviour
     private void BombExplode()
     {
         audioSource.PlayOneShot(bombExplode, 0.8f);
+    }
+
+    private void BouncerBounce()
+    {
+        audioSource.PlayOneShot(bouncerBounce, 0.8f);
     }
 }
