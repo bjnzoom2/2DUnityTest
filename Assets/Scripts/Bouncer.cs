@@ -3,7 +3,7 @@ using UnityEngine;
 public class Bouncer : MonoBehaviour, IDamager
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created 
-    public float bouncerSpeed = 10.0f;
+    public float bouncerSpeed = 9.5f;
     private int bounceCount = 0;
     public int maxBounce = 3;
     private Vector3 movingVector;
@@ -13,6 +13,9 @@ public class Bouncer : MonoBehaviour, IDamager
     {
         get; private set;
     }
+
+    private float xBounds = 13.25f;
+    private float yBounds = 7.075f;
 
     void Start()
     {
@@ -27,26 +30,26 @@ public class Bouncer : MonoBehaviour, IDamager
 
         if (bounceCount <= maxBounce && enteredBorders)
         {
-            if ((transform.position + movingVector).x > 15.0f || (transform.position + movingVector).x < -15.0f)
+            if ((transform.position + movingVector).x > xBounds || (transform.position + movingVector).x < -xBounds)
             {
-                float overshoot = (movingVector.x > 0.0f) ? (transform.position + movingVector).x - 15.0f : (transform.position + movingVector).x + 15.0f;
-                transform.position = (movingVector.x > 0.0f) ? new Vector3(15.0f - overshoot, transform.position.y, 0.0f) : new Vector3(-15.0f - overshoot, transform.position.y, 0.0f);
+                float overshoot = (movingVector.x > 0.0f) ? (transform.position + movingVector).x - xBounds : (transform.position + movingVector).x + xBounds;
+                transform.position = (movingVector.x > 0.0f) ? new Vector3(xBounds - overshoot, transform.position.y, 0.0f) : new Vector3(-xBounds - overshoot, transform.position.y, 0.0f);
                 direction = new Vector3(-direction.x, direction.y, 0.0f);
                 bounceCount++;
                 return;
             }
 
-            if ((transform.position + movingVector).y > 7.075f || (transform.position + movingVector).y < -7.075)
+            if ((transform.position + movingVector).y > yBounds || (transform.position + movingVector).y < -yBounds)
             {
-                float overshoot = (movingVector.y > 0.0f) ? (transform.position + movingVector).y - 7.075f : (transform.position + movingVector).y + 7.075f;
-                transform.position = (movingVector.y > 0.0f) ? new Vector3(transform.position.x, 7.075f - overshoot, 0.0f) : new Vector3(transform.position.x, -7.075f - overshoot, 0.0f);
+                float overshoot = (movingVector.y > 0.0f) ? (transform.position + movingVector).y - yBounds : (transform.position + movingVector).y + yBounds;
+                transform.position = (movingVector.y > 0.0f) ? new Vector3(transform.position.x, yBounds - overshoot, 0.0f) : new Vector3(transform.position.x, -yBounds - overshoot, 0.0f);
                 direction = new Vector3(direction.x, -direction.y, 0.0f);
                 bounceCount++;
                 return;
             }
         }
 
-        if (transform.position.x <= 15.0f && transform.position.x >= -15.0f && transform.position.y <= 7.075f && transform.position.y >= -7.075f && !enteredBorders)
+        if (transform.position.x <= xBounds && transform.position.x >= -xBounds && transform.position.y <= yBounds && transform.position.y >= -yBounds && !enteredBorders)
         {
             enteredBorders = true;
         }

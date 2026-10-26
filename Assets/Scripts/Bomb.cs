@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -39,6 +40,8 @@ public class Bomb : MonoBehaviour
         rotationValue = rotationStrength - rotationStrength * rotationEndPercentage;
         rotationDecay = rotationStrength / duration;
         implodeTime = duration - implodeBefore;
+
+        OnFire?.Invoke();
     }
 
     private void Update()
@@ -72,6 +75,7 @@ public class Bomb : MonoBehaviour
                 Instantiate(shrapnelPrefab, transform.position, Quaternion.Euler(0.0f, 0.0f, zRotation + (60.0f * i)));
             }
 
+            OnExplode?.Invoke();
             Destroy(gameObject);
             return;
         }
@@ -98,4 +102,7 @@ public class Bomb : MonoBehaviour
 
         timer += Time.deltaTime;
     }
+
+    static public event Action OnFire;
+    static public event Action OnExplode;
 }

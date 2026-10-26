@@ -14,7 +14,6 @@ public class UIHandler : MonoBehaviour
         healthText.text = "100/100";
     }
 
-    // Update is called once per frame
     private void OnEnable()
     {
         PlayerHealth.OnTakeDamage += UpdateUI;
