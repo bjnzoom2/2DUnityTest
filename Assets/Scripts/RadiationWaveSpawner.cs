@@ -24,7 +24,7 @@ public class RadiationWaveSpawner : MonoBehaviour
         }
         if (timer >= spawnInterval)
         {
-            GameObject radiationInstance = Instantiate(radiationWavePrefab, new Vector3(UnityEngine.Random.Range(-16.0f, 16.0f), 8.0f, 0.0f), Quaternion.identity);
+            GameObject radiationInstance = Instantiate(radiationWavePrefab, new Vector3(UnityEngine.Random.Range(-15.0f, 15.0f), 8.0f, 0.0f), Quaternion.identity);
             timer = 0.0f;
         }
 

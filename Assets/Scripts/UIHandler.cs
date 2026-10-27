@@ -16,14 +16,13 @@ public class UIHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerHealth.OnTakeDamage += UpdateUI;
+        PlayerHealth.OnHealthChange += UpdateUI;
     }
 
     private void UpdateUI(float health)
     {
         if (healthBar != null && healthText != null)
         {
-            if (health < 0.0f) health = 0.0f;
             healthBar.value = health;
             healthText.text = $"{health}/100";
         }

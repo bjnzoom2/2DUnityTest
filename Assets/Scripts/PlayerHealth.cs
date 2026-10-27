@@ -33,18 +33,27 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    static public event Action<float> OnTakeDamage;
+    static public event Action<float> OnHealthChange;
     static public event Action OnDeath;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<IDamager>(out IDamager damager))
+        if (collision.gameObject.TryGetComponent(out IDamager damager))
         {
             GameObject damagerGameObject = (damager as Component).gameObject;
 
             Health -= damager.Damage;
+            if (Health < 0.0f) Health = 0.0f;
             Destroy(damagerGameObject);
-            OnTakeDamage?.Invoke(Health);
+            OnHealthChange?.Invoke(Health);
+        } else if (collision.gameObject.TryGetComponent(out IHealer healer))
+        {
+            GameObject healerGameObject = (healer as Component).gameObject;
+
+            Health += healer.HealAmount;
+            if (Health > 100.0f) Health = 100.0f;
+            Destroy(healerGameObject);
+            OnHealthChange?.Invoke(Health);
         }
     }
 }

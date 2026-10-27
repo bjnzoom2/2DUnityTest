@@ -1,10 +1,9 @@
 using System.Collections;
+using System;
 using UnityEngine;
 
 public class LogicHandler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-
     static public bool BulletsActive
     {
         get; private set;
@@ -24,6 +23,8 @@ public class LogicHandler : MonoBehaviour
     {
         get; private set;
     }
+
+    static public event Action SpawnCandy;
 
     private void Start()
     {
@@ -46,7 +47,9 @@ public class LogicHandler : MonoBehaviour
         BombsActive = false;
         BouncersActive = false;
         RadiationActive = false;
-        yield return new WaitForSeconds(7.0f);
+        yield return new WaitForSeconds(3.5f);
+        SpawnCandy?.Invoke();
+        yield return new WaitForSeconds(3.5f);
 
         Debug.Log("Phase 2");
         BulletsActive = false;
@@ -63,9 +66,12 @@ public class LogicHandler : MonoBehaviour
         BombsActive = false;
         BouncersActive = false;
         RadiationActive = false;
-        yield return new WaitForSeconds(7.0f);
+        yield return new WaitForSeconds(3.5f);
+        SpawnCandy?.Invoke();
+        yield return new WaitForSeconds(3.5f);
 
         Debug.Log("Phase 3");
+        Camera.main.orthographicSize = 14.0f;
         BulletsActive = true;
         BombsActive = true;
         BouncersActive = true;
