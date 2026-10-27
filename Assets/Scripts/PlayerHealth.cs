@@ -27,12 +27,14 @@ public class PlayerHealth : MonoBehaviour
                 deathParticleInstance.Play();
             }
             Debug.Log("Dead");
+            OnDeath?.Invoke();
             Destroy(gameObject);
             return;
         }
     }
 
     static public event Action<float> OnTakeDamage;
+    static public event Action OnDeath;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

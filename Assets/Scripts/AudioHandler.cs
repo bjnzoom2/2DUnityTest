@@ -7,6 +7,7 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip bombFire;
     [SerializeField] private AudioClip bombExplode;
     [SerializeField] private AudioClip bouncerBounce;
+    [SerializeField] private AudioClip death;
 
     private void Start()
     {
@@ -18,20 +19,26 @@ public class AudioHandler : MonoBehaviour
         Bomb.OnFire += BombFire;
         Bomb.OnExplode += BombExplode;
         Bouncer.OnBounce += BouncerBounce;
+        PlayerHealth.OnDeath += Death;
     }
 
     private void BombFire()
     {
-        audioSource.PlayOneShot(bombFire, 0.8f);
+        audioSource.PlayOneShot(bombFire, 0.5f);
     }
 
     private void BombExplode()
     {
-        audioSource.PlayOneShot(bombExplode, 0.8f);
+        audioSource.PlayOneShot(bombExplode, 0.5f);
     }
 
     private void BouncerBounce()
     {
-        audioSource.PlayOneShot(bouncerBounce, 0.8f);
+        audioSource.PlayOneShot(bouncerBounce, 0.5f);
+    }
+
+    private void Death()
+    {
+        audioSource.PlayOneShot(death, 1.0f);
     }
 }
