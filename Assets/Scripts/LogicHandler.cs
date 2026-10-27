@@ -25,9 +25,16 @@ public class LogicHandler : MonoBehaviour
     }
 
     static public event Action SpawnCandy;
+    static public event Action SpawnBlackHole;
+
+    static public float FinalPhaseTime
+    {
+        get; private set;
+    }
 
     private void Start()
     {
+        FinalPhaseTime = 60.0f;
         StartCoroutine(GameTimeline());
     }
 
@@ -39,7 +46,7 @@ public class LogicHandler : MonoBehaviour
         BouncersActive = false;
         RadiationActive = false;
         BulletSpawner.spawnInterval = 0.55f;
-        BombSpawner.spawnInterval = 2.3f;
+        BombSpawner.spawnInterval = 2.25f;
         yield return new WaitForSeconds(30.0f);
 
         Debug.Log("Cutscene 1");
@@ -56,8 +63,8 @@ public class LogicHandler : MonoBehaviour
         BombsActive = true;
         BouncersActive = true;
         RadiationActive = true;
-        BombSpawner.spawnInterval = 1.75f;
-        BouncerSpawner.spawnInterval = 5.5f;
+        BombSpawner.spawnInterval = 2.0f;
+        BouncerSpawner.spawnInterval = 6.0f;
         RadiationWaveSpawner.spawnInterval = 0.65f;
         yield return new WaitForSeconds(30.0f);
 
@@ -68,15 +75,16 @@ public class LogicHandler : MonoBehaviour
         RadiationActive = false;
         yield return new WaitForSeconds(3.5f);
         SpawnCandy?.Invoke();
-        yield return new WaitForSeconds(3.5f);
+        yield return new WaitForSeconds(4.5f);
 
         Debug.Log("Phase 3");
         Camera.main.orthographicSize = 14.0f;
-        BulletsActive = true;
-        BombsActive = true;
-        BouncersActive = true;
-        RadiationActive = true;
-        yield return new WaitForSeconds(60.0f);
+        BulletsActive = false;
+        BombsActive = false;
+        BouncersActive = false;
+        RadiationActive = false;
+        SpawnBlackHole?.Invoke();
+        yield return new WaitForSeconds(FinalPhaseTime);
 
         Debug.Log("Ending");
         BulletsActive = false;

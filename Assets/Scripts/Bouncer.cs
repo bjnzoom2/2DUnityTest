@@ -20,7 +20,7 @@ public class Bouncer : MonoBehaviour, IDamager
 
     private void Start()
     {
-        this.Damage = 50.0f;
+        this.Damage = 40.0f;
         direction = transform.right;
     }
 
