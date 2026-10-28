@@ -27,7 +27,7 @@ public class Candy : MonoBehaviour, IHealer
         transform.position += Vector3.right * candySpeed * Time.deltaTime;
         transform.Rotate(0.0f, 0.0f, 50.0f * Time.deltaTime);
 
-        if (transform.position.x > 25.0f || transform.position.x < -25.0f)
+        if (transform.position.x > 50.0f || transform.position.x < -50.0f)
         {
             Destroy(gameObject);
             return;

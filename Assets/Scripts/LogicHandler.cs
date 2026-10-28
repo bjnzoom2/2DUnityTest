@@ -75,10 +75,18 @@ public class LogicHandler : MonoBehaviour
         RadiationActive = false;
         yield return new WaitForSeconds(3.5f);
         SpawnCandy?.Invoke();
-        yield return new WaitForSeconds(4.5f);
+
+        float time = 0.0f;
+        while (time < 3.0f)
+        {
+            Camera.main.orthographicSize = Mathf.Lerp(8.07f, 14.0f, time / 3.0f);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1.5f);
 
         Debug.Log("Phase 3");
-        Camera.main.orthographicSize = 14.0f;
         BulletsActive = false;
         BombsActive = false;
         BouncersActive = false;

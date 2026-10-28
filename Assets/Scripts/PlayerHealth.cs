@@ -56,4 +56,16 @@ public class PlayerHealth : MonoBehaviour
             OnHealthChange?.Invoke(Health);
         }
     }
+
+    private void OnEnable()
+    {
+        BlackHole.DamagePlayer += damagePlayer;
+    }
+
+    private void damagePlayer(float damage)
+    {
+        Health -= damage;
+        if (Health < 0.0f) Health = 0.0f;
+        OnHealthChange?.Invoke(Health);
+    }
 }
