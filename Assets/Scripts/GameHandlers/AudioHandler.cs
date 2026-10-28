@@ -8,6 +8,7 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip bombExplode;
     [SerializeField] private AudioClip bouncerBounce;
     [SerializeField] private AudioClip death;
+    [SerializeField] private AudioClip heal;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class AudioHandler : MonoBehaviour
         Bomb.OnExplode += BombExplode;
         Bouncer.OnBounce += BouncerBounce;
         PlayerHealth.OnDeath += Death;
+        PlayerHealth.OnHeal += Heal;
     }
 
     private void BombFire()
@@ -40,5 +42,10 @@ public class AudioHandler : MonoBehaviour
     private void Death()
     {
         audioSource.PlayOneShot(death, 1.0f);
+    }
+
+    private void Heal()
+    {
+        audioSource.PlayOneShot(heal, 1.0f);
     }
 }

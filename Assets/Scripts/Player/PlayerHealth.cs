@@ -35,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
     static public event Action<float> OnHealthChange;
     static public event Action OnDeath;
+    static public event Action OnHeal;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -54,6 +55,7 @@ public class PlayerHealth : MonoBehaviour
             if (Health > 100.0f) Health = 100.0f;
             Destroy(healerGameObject);
             OnHealthChange?.Invoke(Health);
+            OnHeal?.Invoke();
         }
     }
 

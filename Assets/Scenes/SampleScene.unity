@@ -1181,6 +1181,7 @@ MonoBehaviour:
   bombExplode: {fileID: 8300000, guid: c43c329080a336e47a1273cc46d9085d, type: 3}
   bouncerBounce: {fileID: 8300000, guid: 9a2b37fb4263c1a4e941b532b8515181, type: 3}
   death: {fileID: 8300000, guid: e621ab1dc6712f440abbb69e15f9fd23, type: 3}
+  heal: {fileID: 8300000, guid: c4125c1ddc3b39542a435fb58e29ae35, type: 3}
 --- !u!1 &1257930095
 GameObject:
   m_ObjectHideFlags: 0
