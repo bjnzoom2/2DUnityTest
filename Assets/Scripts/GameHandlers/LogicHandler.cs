@@ -35,7 +35,7 @@ public class LogicHandler : MonoBehaviour
 
     private void Start()
     {
-        FinalPhaseTime = 60.0f;
+        FinalPhaseTime = 45.0f;
         StartCoroutine(GameTimeline());
     }
 
