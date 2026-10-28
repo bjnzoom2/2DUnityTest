@@ -3,20 +3,32 @@ using UnityEngine;
 
 public class AudioHandler : MonoBehaviour
 {
-    private AudioSource audioSource;
+    [SerializeField] private GameObject sfxHandler;
+    [SerializeField] private GameObject musicHandler;
+    private AudioSource sfxSource;
+    private AudioSource musicSource;
+
     [SerializeField] private AudioClip bombFire;
     [SerializeField] private AudioClip bombExplode;
     [SerializeField] private AudioClip bouncerBounce;
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip heal;
 
+    [SerializeField] private AudioClip music;
+
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        sfxSource = sfxHandler.GetComponent<AudioSource>();
+        musicSource = musicHandler.GetComponent<AudioSource>();
+
+        musicSource.volume = 0.5f;
+        musicSource.clip = music;
     }
 
     private void OnEnable()
     {
+        LogicHandler.StartMusic += PlayMusic;
+
         Bomb.OnFire += BombFire;
         Bomb.OnExplode += BombExplode;
         Bouncer.OnBounce += BouncerBounce;
@@ -26,26 +38,31 @@ public class AudioHandler : MonoBehaviour
 
     private void BombFire()
     {
-        audioSource.PlayOneShot(bombFire, 0.5f);
+        sfxSource.PlayOneShot(bombFire, 1.0f);
     }
 
     private void BombExplode()
     {
-        audioSource.PlayOneShot(bombExplode, 0.5f);
+        sfxSource.PlayOneShot(bombExplode, 1.0f);
     }
 
     private void BouncerBounce()
     {
-        audioSource.PlayOneShot(bouncerBounce, 0.5f);
+        sfxSource.PlayOneShot(bouncerBounce, 1.0f);
     }
 
     private void Death()
     {
-        audioSource.PlayOneShot(death, 1.0f);
+        sfxSource.PlayOneShot(death, 1.0f);
     }
 
     private void Heal()
     {
-        audioSource.PlayOneShot(heal, 1.0f);
+        sfxSource.PlayOneShot(heal, 1.0f);
+    }
+
+    private void PlayMusic()
+    {
+        musicSource.Play();
     }
 }
