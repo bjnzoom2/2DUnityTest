@@ -15,7 +15,7 @@ public class BlackHoleDamageParticle : MonoBehaviour
 
     private void Start()
     {
-        Damage = 15.0f;
+        Damage = 20.0f;
         particleSystem = GetComponent<ParticleSystem>();
 
         player = GameObject.FindGameObjectWithTag("Player");

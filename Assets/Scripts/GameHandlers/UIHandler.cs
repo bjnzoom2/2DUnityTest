@@ -4,8 +4,9 @@ using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
 {
-    public Slider healthBar;
-    public TextMeshProUGUI healthText;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI startText;
 
     private void Start()
     {
@@ -16,6 +17,7 @@ public class UIHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        LogicHandler.StartGame += startGame;
         PlayerHealth.OnHealthChange += UpdateUI;
     }
 
@@ -26,5 +28,10 @@ public class UIHandler : MonoBehaviour
             healthBar.value = health;
             healthText.text = $"{health}/100";
         }
+    }
+
+    private void startGame()
+    {
+        Destroy(startText.gameObject);
     }
 }
