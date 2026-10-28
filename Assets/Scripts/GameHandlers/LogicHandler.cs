@@ -27,6 +27,7 @@ public class LogicHandler : MonoBehaviour
     static public event Action SpawnCandy;
     static public event Action SpawnBlackHole;
     static public event Action StartGame;
+    static public event Action EndGame;
 
     static public float FinalPhaseTime
     {
@@ -113,5 +114,6 @@ public class LogicHandler : MonoBehaviour
         BombsActive = false;
         BouncersActive = false;
         RadiationActive = false;
+        EndGame?.Invoke();
     }
 }

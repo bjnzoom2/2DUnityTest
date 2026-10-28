@@ -18,6 +18,7 @@ public class UIHandler : MonoBehaviour
     private void OnEnable()
     {
         LogicHandler.StartGame += startGame;
+        LogicHandler.EndGame += endGame;
         PlayerHealth.OnHealthChange += UpdateUI;
     }
 
@@ -32,6 +33,12 @@ public class UIHandler : MonoBehaviour
 
     private void startGame()
     {
-        Destroy(startText.gameObject);
+        startText.gameObject.SetActive(false);
+    }
+
+    private void endGame()
+    {
+        startText.gameObject.SetActive(true);
+        startText.text = "You Win";
     }
 }
