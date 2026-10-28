@@ -26,7 +26,7 @@ public class LogicHandler : MonoBehaviour
 
     static public event Action SpawnCandy;
     static public event Action SpawnBlackHole;
-    static public event Action StartMusic;
+    static public event Action StartGame;
 
     static public float FinalPhaseTime
     {
@@ -41,8 +41,20 @@ public class LogicHandler : MonoBehaviour
 
     private IEnumerator GameTimeline()
     {
+        bool start = false;
+        while (!start)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                start = true;
+                break;
+            }
+
+            yield return null;
+        }
+
         Debug.Log("Phase 1");
-        StartMusic?.Invoke();
+        StartGame?.Invoke();
         BulletsActive = true;
         BombsActive = true;
         BouncersActive = false;

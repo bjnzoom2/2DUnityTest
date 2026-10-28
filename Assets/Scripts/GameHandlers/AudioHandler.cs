@@ -27,7 +27,7 @@ public class AudioHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        LogicHandler.StartMusic += PlayMusic;
+        LogicHandler.StartGame += PlayMusic;
 
         Bomb.OnFire += BombFire;
         Bomb.OnExplode += BombExplode;

@@ -8,28 +8,44 @@ public class PlayerMovement : MonoBehaviour
 
     public float speed = 10.0f;
     public float jumpScale = 9.0f;
+    private bool start = false;
 
     private void Start()
     {
         Debug.Log("Hello");
         rigidbody = GetComponent<Rigidbody2D>();
+
+        rigidbody.gravityScale = 0.0f;
     }
 
-    // Update is called once per frame
     private void Update()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        if (horizontalInput != 0.0f)
+        if (start)
         {
-            rigidbody.linearVelocityX = horizontalInput * speed;
-        } else
-        {
-            rigidbody.linearVelocityX = 0;
-        }
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            rigidbody.linearVelocity = Vector2.up * jumpScale;
+            if (horizontalInput != 0.0f)
+            {
+                rigidbody.linearVelocityX = horizontalInput * speed;
+            }
+            else
+            {
+                rigidbody.linearVelocityX = 0;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                rigidbody.linearVelocity = Vector2.up * jumpScale;
+            }
         }
+    }
+
+    private void OnEnable()
+    {
+        LogicHandler.StartGame += () =>
+        {
+            start = true;
+            rigidbody.gravityScale = 2.5f;
+        };
     }
 }
