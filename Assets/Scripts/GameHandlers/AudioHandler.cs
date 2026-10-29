@@ -13,6 +13,7 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip bouncerBounce;
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip heal;
+    [SerializeField] private AudioClip win;
 
     [SerializeField] private AudioClip music;
 
@@ -28,6 +29,7 @@ public class AudioHandler : MonoBehaviour
     private void OnEnable()
     {
         LogicHandler.StartGame += PlayMusic;
+        LogicHandler.EndGame += StopMusic;
 
         Bomb.OnFire += BombFire;
         Bomb.OnExplode += BombExplode;
@@ -48,12 +50,12 @@ public class AudioHandler : MonoBehaviour
 
     private void BouncerBounce()
     {
-        sfxSource.PlayOneShot(bouncerBounce, 1.0f);
+        sfxSource.PlayOneShot(bouncerBounce, 1.2f);
     }
 
     private void Death()
     {
-        sfxSource.PlayOneShot(death, 1.0f);
+        sfxSource.PlayOneShot(death, 1.2f);
     }
 
     private void Heal()
@@ -64,5 +66,11 @@ public class AudioHandler : MonoBehaviour
     private void PlayMusic()
     {
         musicSource.Play();
+    }
+
+    private void StopMusic()
+    {
+        musicSource.Stop();
+        sfxSource.PlayOneShot(win, 1.0f);
     }
 }

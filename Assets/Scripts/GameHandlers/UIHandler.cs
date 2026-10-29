@@ -39,6 +39,7 @@ public class UIHandler : MonoBehaviour
     private void endGame()
     {
         startText.gameObject.SetActive(true);
+        startText.rectTransform.anchoredPosition = Vector2.zero;
         startText.text = "You Win";
     }
 }
