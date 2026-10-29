@@ -7,6 +7,9 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private GameObject musicHandler;
     private AudioSource sfxSource;
     private AudioSource musicSource;
+    private float masterVolume;
+    private bool musicEnabled;
+    private bool sfxEnabled;
 
     [SerializeField] private AudioClip bombFire;
     [SerializeField] private AudioClip bombExplode;
@@ -16,6 +19,13 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip win;
 
     [SerializeField] private AudioClip music;
+
+    private void Awake()
+    {
+        masterVolume = PlayerPrefs.GetFloat("Master Volume");
+        musicEnabled = (PlayerPrefs.GetInt("Music On") == 1);
+        sfxEnabled = (PlayerPrefs.GetInt("SFX On") == 1);
+    }
 
     private void Start()
     {
@@ -28,39 +38,45 @@ public class AudioHandler : MonoBehaviour
 
     private void OnEnable()
     {
-        LogicHandler.StartGame += PlayMusic;
-        LogicHandler.EndGame += StopMusic;
+        if (musicEnabled)
+        {
+            LogicHandler.StartGame += PlayMusic;
+            LogicHandler.EndGame += StopMusic;
+        }
 
-        Bomb.OnFire += BombFire;
-        Bomb.OnExplode += BombExplode;
-        Bouncer.OnBounce += BouncerBounce;
-        PlayerHealth.OnDeath += Death;
-        PlayerHealth.OnHeal += Heal;
+        if (sfxEnabled)
+        {
+            Bomb.OnFire += BombFire;
+            Bomb.OnExplode += BombExplode;
+            Bouncer.OnBounce += BouncerBounce;
+            PlayerHealth.OnDeath += Death;
+            PlayerHealth.OnHeal += Heal;
+        }
     }
 
     private void BombFire()
     {
-        sfxSource.PlayOneShot(bombFire, 1.0f);
+        sfxSource.PlayOneShot(bombFire, 1.0f * (masterVolume / 100.0f));
     }
 
     private void BombExplode()
     {
-        sfxSource.PlayOneShot(bombExplode, 1.0f);
+        sfxSource.PlayOneShot(bombExplode, 1.0f * (masterVolume / 100.0f));
     }
 
     private void BouncerBounce()
     {
-        sfxSource.PlayOneShot(bouncerBounce, 1.2f);
+        sfxSource.PlayOneShot(bouncerBounce, 1.2f * (masterVolume / 100.0f));
     }
 
     private void Death()
     {
-        sfxSource.PlayOneShot(death, 1.2f);
+        sfxSource.PlayOneShot(death, 1.2f * (masterVolume / 100.0f));
     }
 
     private void Heal()
     {
-        sfxSource.PlayOneShot(heal, 1.0f);
+        sfxSource.PlayOneShot(heal, 1.0f * (masterVolume / 100.0f));
     }
 
     private void PlayMusic()
@@ -71,6 +87,6 @@ public class AudioHandler : MonoBehaviour
     private void StopMusic()
     {
         musicSource.Stop();
-        sfxSource.PlayOneShot(win, 1.0f);
+        sfxSource.PlayOneShot(win, 1.0f * (masterVolume / 100.0f));
     }
 }
