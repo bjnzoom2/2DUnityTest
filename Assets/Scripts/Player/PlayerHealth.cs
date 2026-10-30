@@ -26,7 +26,6 @@ public class PlayerHealth : MonoBehaviour
                 ParticleSystem deathParticleInstance = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
                 deathParticleInstance.Play();
             }
-            Debug.Log("Dead");
             OnDeath?.Invoke();
             Destroy(gameObject);
             return;

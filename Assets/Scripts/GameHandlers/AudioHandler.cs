@@ -52,6 +52,8 @@ public class AudioHandler : MonoBehaviour
             PlayerHealth.OnDeath += Death;
             PlayerHealth.OnHeal += Heal;
         }
+
+        DeathHandler.ChangeAudioPitch += AudioPitchAdjust;
     }
 
     private void BombFire()
@@ -88,5 +90,10 @@ public class AudioHandler : MonoBehaviour
     {
         musicSource.Stop();
         sfxSource.PlayOneShot(win, 1.0f * (masterVolume / 100.0f));
+    }
+
+    private void AudioPitchAdjust(float pitch)
+    {
+        musicSource.pitch = pitch;
     }
 }
