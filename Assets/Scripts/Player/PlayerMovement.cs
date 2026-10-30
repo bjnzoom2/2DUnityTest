@@ -3,17 +3,20 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private Rigidbody2D rigidbody;
 
     public float speed = 10.0f;
     public float jumpScale = 9.0f;
     private bool start = false;
 
+    private void Awake()
+    {
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
     private void Start()
     {
         Debug.Log("Hello");
-        rigidbody = GetComponent<Rigidbody2D>();
 
         rigidbody.gravityScale = 0.0f;
     }

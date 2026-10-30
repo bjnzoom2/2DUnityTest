@@ -13,10 +13,14 @@ public class BlackHoleDamageParticle : MonoBehaviour
 
     static public event Action<List<ParticleSystem.Particle>, ParticleSystem> OnDamageParticleHit;
 
+    private void Awake()
+    {
+        particleSystem = GetComponent<ParticleSystem>();
+    }
+
     private void Start()
     {
         Damage = 20.0f;
-        particleSystem = GetComponent<ParticleSystem>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         BoxCollider2D collider = player.GetComponent<BoxCollider2D>();
@@ -28,5 +32,10 @@ public class BlackHoleDamageParticle : MonoBehaviour
         List<ParticleSystem.Particle> particles = new List<ParticleSystem.Particle>();
         particleSystem.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, particles);
         OnDamageParticleHit?.Invoke(particles, particleSystem);
+    }
+
+    private void OnDestroy()
+    {
+        OnDamageParticleHit = null;
     }
 }

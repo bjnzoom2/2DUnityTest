@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class AudioHandler : MonoBehaviour
@@ -25,13 +24,13 @@ public class AudioHandler : MonoBehaviour
         masterVolume = PlayerPrefs.GetFloat("Master Volume");
         musicEnabled = (PlayerPrefs.GetInt("Music On") == 1);
         sfxEnabled = (PlayerPrefs.GetInt("SFX On") == 1);
+
+        sfxSource = sfxHandler.GetComponent<AudioSource>();
+        musicSource = musicHandler.GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        sfxSource = sfxHandler.GetComponent<AudioSource>();
-        musicSource = musicHandler.GetComponent<AudioSource>();
-
         musicSource.volume = 0.5f;
         musicSource.clip = music;
     }
@@ -95,5 +94,25 @@ public class AudioHandler : MonoBehaviour
     private void AudioPitchAdjust(float pitch)
     {
         musicSource.pitch = pitch;
+    }
+
+    private void OnDisable()
+    {
+        if (musicEnabled)
+        {
+            LogicHandler.StartGame -= PlayMusic;
+            LogicHandler.EndGame -= StopMusic;
+        }
+
+        if (sfxEnabled)
+        {
+            Bomb.OnFire -= BombFire;
+            Bomb.OnExplode -= BombExplode;
+            Bouncer.OnBounce -= BouncerBounce;
+            PlayerHealth.OnDeath -= Death;
+            PlayerHealth.OnHeal -= Heal;
+        }
+
+        DeathHandler.ChangeAudioPitch -= AudioPitchAdjust;
     }
 }

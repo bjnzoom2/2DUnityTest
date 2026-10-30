@@ -22,6 +22,7 @@ public class DeathHandler : MonoBehaviour
     }
 
     static public event Action<float> ChangeAudioPitch;
+    static public event Action UIGameOver;
 
     private void OnEnable()
     {
@@ -46,6 +47,13 @@ public class DeathHandler : MonoBehaviour
             yield return null;
         }
 
-        Debug.Log("Death");
+        yield return new WaitForSecondsRealtime(1.0f);
+        UIGameOver?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        ChangeAudioPitch = null;
+        UIGameOver = null;
     }
 }

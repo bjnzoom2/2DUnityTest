@@ -13,4 +13,9 @@ public class BlackHoleSpawner : MonoBehaviour
     {
         Instantiate(blackHolePrefab, new Vector3(19.0f, 0.0f, 0.0f), Quaternion.identity);
     }
+
+    private void OnDisable()
+    {
+        LogicHandler.SpawnBlackHole -= spawnBlackHole;
+    }
 }

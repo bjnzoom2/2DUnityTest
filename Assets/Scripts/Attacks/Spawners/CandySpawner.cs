@@ -14,4 +14,9 @@ public class CandySpawner : MonoBehaviour
     {
         Instantiate(candyPrefab, new Vector3(-17.0f, UnityEngine.Random.Range(-6.5f, 6.5f), 0.0f), Quaternion.identity);
     }
+
+    private void OnDisable()
+    {
+        LogicHandler.SpawnCandy -= spawnCandy;
+    }
 }

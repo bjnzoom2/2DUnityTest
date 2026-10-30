@@ -7,13 +7,8 @@ public class BouncerSpawner : MonoBehaviour
     private float timer = 0.0f;
     [NonSerialized] static public float spawnInterval = 5.5f;
 
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!LogicHandler.BouncersActive)
         {

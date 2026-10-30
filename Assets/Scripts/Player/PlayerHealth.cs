@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private BoxCollider2D collider;
     [SerializeField] private ParticleSystem deathParticlePrefab;
 
     public float Health
@@ -13,7 +12,6 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-        collider = GetComponent<BoxCollider2D>();
         Health = 100.0f;
     }
 
@@ -61,6 +59,13 @@ public class PlayerHealth : MonoBehaviour
     private void OnEnable()
     {
         BlackHole.DamagePlayer += damagePlayer;
+    }
+
+    private void OnDestroy()
+    {
+        OnHealthChange = null;
+        OnHeal = null;
+        OnDeath = null;
     }
 
     private void damagePlayer(float damage)

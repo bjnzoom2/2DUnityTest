@@ -9,11 +9,6 @@ public class BulletSpawner : MonoBehaviour
     [NonSerialized] static public float spawnInterval = 0.5f;
     private float timer = 0.0f;
 
-    private void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     private void Update()
     {

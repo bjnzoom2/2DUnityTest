@@ -34,10 +34,24 @@ public class LogicHandler : MonoBehaviour
         get; private set;
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        Time.timeScale = 1.0f;
         FinalPhaseTime = 45.0f;
         StartCoroutine(GameTimeline());
+    }
+
+    private void OnDestroy()
+    {
+        BulletsActive = false;
+        BombsActive = false;
+        BouncersActive = false;
+        RadiationActive = false;
+
+        SpawnCandy = null;
+        SpawnBlackHole = null;
+        StartGame = null;
+        EndGame = null;
     }
 
     private IEnumerator GameTimeline()

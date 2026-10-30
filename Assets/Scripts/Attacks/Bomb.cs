@@ -22,9 +22,13 @@ public class Bomb : MonoBehaviour
     private float sinceSwitched = 0.0f;
     [SerializeField] private GameObject shrapnelPrefab;
 
-    private void Start()
+    private void Awake()
     {
         renderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void Start()
+    {
         baseColor = renderer.color;
         playerTarget = GameObject.FindGameObjectWithTag("Player");
 

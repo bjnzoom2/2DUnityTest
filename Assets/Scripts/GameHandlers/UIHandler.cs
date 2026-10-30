@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIHandler : MonoBehaviour
@@ -8,18 +10,34 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI startText;
 
+    [SerializeField] private CanvasGroup gameOver;
+    [SerializeField] private Button gameOverButton;
+
     private void Start()
     {
         if (healthBar == null && healthText == null) return;
         healthBar.value = 100.0f;
         healthText.text = "100/100";
+
+        if (gameOver != null)
+        {
+            gameOver.interactable = false;
+            gameOver.alpha = 0.0f;
+            gameOverButton.onClick.AddListener(TryAgainButtonClick);
+        }
     }
 
     private void OnEnable()
     {
-        LogicHandler.StartGame += startGame;
-        LogicHandler.EndGame += endGame;
+        LogicHandler.StartGame += StartGame;
+        LogicHandler.EndGame += EndGame;
+
         PlayerHealth.OnHealthChange += UpdateUI;
+
+        DeathHandler.UIGameOver += () =>
+        {
+            StartCoroutine(GameOver());
+        };
     }
 
     private void UpdateUI(float health)
@@ -31,15 +49,35 @@ public class UIHandler : MonoBehaviour
         }
     }
 
-    private void startGame()
+    private void StartGame()
     {
         startText.gameObject.SetActive(false);
     }
 
-    private void endGame()
+    private void EndGame()
     {
         startText.gameObject.SetActive(true);
         startText.rectTransform.anchoredPosition = Vector2.zero;
         startText.text = "You Win";
+    }
+
+    private IEnumerator GameOver()
+    {
+        if (gameOver == null) yield return null;
+
+        float timer = 0.0f;
+        while (timer < 1.0f)
+        {
+            gameOver.alpha = timer;
+            timer += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        gameOver.interactable = true;
+    }
+
+    private void TryAgainButtonClick()
+    {
+        SceneManager.LoadScene(1);
     }
 }

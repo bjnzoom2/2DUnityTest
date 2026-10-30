@@ -9,13 +9,8 @@ public class RadiationWaveSpawner : MonoBehaviour
     private float timer = 0.0f;
     [NonSerialized] static public float spawnInterval = 0.6f;
 
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (!LogicHandler.RadiationActive)
         {
