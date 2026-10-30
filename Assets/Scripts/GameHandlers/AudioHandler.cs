@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioHandler : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class AudioHandler : MonoBehaviour
     [SerializeField] private AudioClip death;
     [SerializeField] private AudioClip heal;
     [SerializeField] private AudioClip win;
+    [SerializeField] private AudioClip hurt;
 
     [SerializeField] private AudioClip music;
 
@@ -31,7 +33,7 @@ public class AudioHandler : MonoBehaviour
 
     private void Start()
     {
-        musicSource.volume = 0.5f;
+        musicSource.volume = 0.5f * (masterVolume / 100.0f);
         musicSource.clip = music;
     }
 
@@ -40,7 +42,7 @@ public class AudioHandler : MonoBehaviour
         if (musicEnabled)
         {
             LogicHandler.StartGame += PlayMusic;
-            LogicHandler.EndGame += StopMusic;
+            LogicHandler.EndGame += Win;
         }
 
         if (sfxEnabled)
@@ -50,6 +52,7 @@ public class AudioHandler : MonoBehaviour
             Bouncer.OnBounce += BouncerBounce;
             PlayerHealth.OnDeath += Death;
             PlayerHealth.OnHeal += Heal;
+            PlayerHealth.OnHurt += Hurt;
         }
 
         DeathHandler.ChangeAudioPitch += AudioPitchAdjust;
@@ -72,7 +75,7 @@ public class AudioHandler : MonoBehaviour
 
     private void Death()
     {
-        sfxSource.PlayOneShot(death, 1.2f * (masterVolume / 100.0f));
+        sfxSource.PlayOneShot(death, 1.3f * (masterVolume / 100.0f));
     }
 
     private void Heal()
@@ -80,12 +83,17 @@ public class AudioHandler : MonoBehaviour
         sfxSource.PlayOneShot(heal, 1.0f * (masterVolume / 100.0f));
     }
 
+    private void Hurt()
+    {
+        sfxSource.PlayOneShot(hurt, 0.7f * (masterVolume / 100.0f));
+    }
+
     private void PlayMusic()
     {
         musicSource.Play();
     }
 
-    private void StopMusic()
+    private void Win()
     {
         musicSource.Stop();
         sfxSource.PlayOneShot(win, 1.0f * (masterVolume / 100.0f));
@@ -101,7 +109,7 @@ public class AudioHandler : MonoBehaviour
         if (musicEnabled)
         {
             LogicHandler.StartGame -= PlayMusic;
-            LogicHandler.EndGame -= StopMusic;
+            LogicHandler.EndGame -= Win;
         }
 
         if (sfxEnabled)

@@ -1459,6 +1459,7 @@ MonoBehaviour:
   death: {fileID: 8300000, guid: e621ab1dc6712f440abbb69e15f9fd23, type: 3}
   heal: {fileID: 8300000, guid: c4125c1ddc3b39542a435fb58e29ae35, type: 3}
   win: {fileID: 8300000, guid: 5bb364fe5b7a24b4d895011abe011f47, type: 3}
+  hurt: {fileID: 8300000, guid: 5bd431dd9b69311468c6ab3e46925232, type: 3}
   music: {fileID: 8300000, guid: 40726ce762860e74bbc3c43736d9dec1, type: 3}
 --- !u!1 &1217174580
 GameObject:
