@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
 
-    public float speed = 10.0f;
+    public float speed = 6.5f;
     public float jumpScale = 9.0f;
     private bool start = false;
 

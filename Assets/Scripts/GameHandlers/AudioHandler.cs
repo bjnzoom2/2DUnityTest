@@ -119,6 +119,7 @@ public class AudioHandler : MonoBehaviour
             Bouncer.OnBounce -= BouncerBounce;
             PlayerHealth.OnDeath -= Death;
             PlayerHealth.OnHeal -= Heal;
+            PlayerHealth.OnHurt -= Hurt;
         }
 
         DeathHandler.ChangeAudioPitch -= AudioPitchAdjust;

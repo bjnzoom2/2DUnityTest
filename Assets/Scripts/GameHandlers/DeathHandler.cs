@@ -47,7 +47,7 @@ public class DeathHandler : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSecondsRealtime(1.0f);
+        yield return new WaitForSecondsRealtime(0.5f);
         UIGameOver?.Invoke();
     }
 

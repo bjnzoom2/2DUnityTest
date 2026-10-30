@@ -347,6 +347,7 @@ GameObject:
   - component: {fileID: 327213286}
   - component: {fileID: 327213285}
   - component: {fileID: 327213287}
+  - component: {fileID: 327213288}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -467,7 +468,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: be1e965064ff8564aa63f48e4fa9ab48, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   speed: 6.5
   jumpScale: 9
 --- !u!61 &327213286
@@ -529,6 +530,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   deathParticlePrefab: {fileID: 7372193300569880133, guid: ff85152626dd974499b1a3c869f3f1cf, type: 3}
+--- !u!114 &327213288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327213281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb44b3c8c6ce993438dd090c460f3961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &334066431
 GameObject:
   m_ObjectHideFlags: 0
