@@ -94,6 +94,7 @@ public class PlayerHealth : MonoBehaviour
             Health -= damage;
             if (Health < 0.0f) Health = 0.0f;
             OnHealthChange?.Invoke(Health);
+            OnHurt?.Invoke();
 
             StartCoroutine(IFrames());
         }
