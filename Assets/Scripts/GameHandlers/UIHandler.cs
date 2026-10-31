@@ -11,7 +11,8 @@ public class UIHandler : MonoBehaviour
     [SerializeField] private TextMeshProUGUI startText;
 
     [SerializeField] private CanvasGroup gameOver;
-    [SerializeField] private Button gameOverButton;
+    [SerializeField] private Button tryAgainButton;
+    [SerializeField] private Button returnButton;
 
     private void Start()
     {
@@ -23,7 +24,8 @@ public class UIHandler : MonoBehaviour
         {
             gameOver.interactable = false;
             gameOver.alpha = 0.0f;
-            gameOverButton.onClick.AddListener(TryAgainButtonClick);
+            tryAgainButton.onClick.AddListener(TryAgainButtonClick);
+            returnButton.onClick.AddListener(ReturnButtonClick);
         }
     }
 
@@ -79,5 +81,10 @@ public class UIHandler : MonoBehaviour
     private void TryAgainButtonClick()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void ReturnButtonClick()
+    {
+        SceneManager.LoadScene(0);
     }
 }
