@@ -5,9 +5,12 @@ public class PlayerMovement : MonoBehaviour
 {
     private Rigidbody2D rigidbody;
 
-    public float speed = 6.5f;
+    public float targetSpeed = 6.5f;
     public float jumpScale = 9.0f;
     private bool start = false;
+    private float xVelocity = 0.0f;
+    private float accelTime = 0.1f;
+    private float horizontalInput;
 
     private void Awake()
     {
@@ -25,21 +28,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (start)
         {
-            float horizontalInput = Input.GetAxisRaw("Horizontal");
-
-            if (horizontalInput != 0.0f)
-            {
-                rigidbody.linearVelocityX = horizontalInput * speed;
-            }
-            else
-            {
-                rigidbody.linearVelocityX = 0;
-            }
+            horizontalInput = Input.GetAxisRaw("Horizontal");
 
             if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
             {
-                rigidbody.linearVelocity = Vector2.up * jumpScale;
+                rigidbody.linearVelocityY = jumpScale;
             }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (start)
+        {
+            float targetXVelocity = horizontalInput * targetSpeed;
+            xVelocity = Mathf.MoveTowards(xVelocity, targetXVelocity, targetSpeed / accelTime * Time.fixedDeltaTime);
+            rigidbody.linearVelocityX = xVelocity;
         }
     }
 
